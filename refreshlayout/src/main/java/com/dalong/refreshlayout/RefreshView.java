@@ -9,6 +9,7 @@ import android.util.AttributeSet;
  */
 
 public class RefreshView extends RefreshLayout {
+
     public RefreshView(Context context) {
         super(context);
     }

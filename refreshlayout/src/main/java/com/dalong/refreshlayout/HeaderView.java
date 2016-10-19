@@ -31,12 +31,12 @@ public class HeaderView extends FrameLayout implements RefreshHeader {
 
     @Override
     public void onRefreshScrolling(int scrollY) {
-        tvPullDown.setText("准备刷新");
+//        tvPullDown.setText("准备刷新");
     }
 
     @Override
     public void onRefreshDoing(int scrollY) {
-        tvPullDown.setText("正在刷新……");
+        tvPullDown.setText("正在刷新...");
     }
 
     @Override

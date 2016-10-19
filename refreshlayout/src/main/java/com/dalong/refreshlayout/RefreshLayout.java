@@ -3,8 +3,11 @@ package com.dalong.refreshlayout;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * Created by zhouweilong on 2016/10/19.
@@ -24,10 +27,16 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     private boolean isRefreshSuccess = false;
     //是否加载完成
     private boolean isLoadSuccess = false;
-
-    public void setOnPullListener(OnRefreshListener listener) {
-        this.listener = listener;
-    }
+    //是否可以下拉刷新
+    private boolean isCanRefresh=true;
+    //是否可以加载更多
+    private boolean isCanLoad=true;
+    //是否自动下拉刷新
+    private boolean isAutoRefresh=false;
+    //正在加载中
+    private boolean isLoading=false;
+    //正在刷新中
+    private boolean isRefreshing=false;
 
     public RefreshLayout(Context context) {
         super(context);
@@ -35,6 +44,75 @@ public class RefreshLayout extends RefreshInterceptLauyout {
 
     public RefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    /**
+     * 设置是否支持下拉刷新
+     * @param isCanRefresh
+     */
+    public void setCanRefresh(boolean isCanRefresh){
+        this.isCanRefresh=isCanRefresh;
+    }
+
+    /**
+     * 设置是否支持加载更多
+     * @param isCanLoad
+     */
+    public void setCanLoad(boolean isCanLoad){
+        this.isCanLoad=isCanLoad;
+    }
+
+    /**
+     * 设置是否支持自动刷新
+     * @param isAutoRefresh
+     */
+    public void setAutoRefresh(boolean isAutoRefresh){
+        this.isAutoRefresh=isAutoRefresh;
+        if(isAutoRefresh)autoRefresh();
+    }
+
+
+    /**
+     * 自动刷新
+     */
+    public void autoRefresh(){
+        isRefreshing=true;
+        measureView(header);
+        int end = header.getMeasuredHeight();
+        performAnim(0, -end, new AnimListener() {
+            @Override
+            public void onDoing() {
+                updateStatus(status.REFRESH_SCROLLING);
+            }
+
+            @Override
+            public void onEnd() {
+                updateStatus(status.REFRESH_DOING);
+            }
+        });
+
+    }
+
+    /**
+     * 测量view
+     * @param v
+     */
+    public void measureView(View v) {
+        if (v == null) {
+            return;
+        }
+        int w = MeasureSpec.makeMeasureSpec(0,
+                MeasureSpec.UNSPECIFIED);
+        int h = MeasureSpec.makeMeasureSpec(0,
+                MeasureSpec.UNSPECIFIED);
+        v.measure(w, h);
+    }
+    /**
+     * 设置接口回调
+     * @param listener
+     */
+    public void setOnRefreshListener(OnRefreshListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -46,7 +124,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 int dy = y - lastYMove;
                 // 如果getScrollY<0，即下拉操作
                 if (getScrollY() < 0) {
-                    if (header != null) {
+                    if (header != null&&isCanRefresh&&!isLoading) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (Math.abs(getScrollY()) > header.getMeasuredHeight()) {
@@ -58,7 +136,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 }
                 // 如果getScrollY>=0，即上拉操作
                 else {
-                    if (footer != null) {
+                    if (footer != null&&isCanLoad&&!isRefreshing) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {
@@ -100,7 +178,10 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         return true;
     }
 
-    //刷新状态
+    /**
+     * 刷新状态
+     * @param status
+     */
     private void updateStatus(RefreshStatus status) {
         this.status = status;
         int scrollY = getScrollY();
@@ -153,31 +234,41 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         }
     }
 
-    //默认状态
+    /**
+     * 默认状态
+     */
     private void onDefault() {
         isRefreshSuccess = false;
         isLoadSuccess = false;
     }
 
-    //滚动到加载状态
+    /**
+     * 滚动到加载状态
+     */
     private void scrolltoLoadStatus() {
+        isLoading=true;
         int start = getScrollY();
         int end = footer.getMeasuredHeight() + bottomScroll;
         performAnim(start, end, new AnimListener() {
             @Override
             public void onDoing() {
+                isLoading=true;
                 updateStatus(status.LOADMORE_SCROLLING);
             }
 
             @Override
             public void onEnd() {
+                isLoading=false;
                 updateStatus(status.LOADMORE_DOING);
             }
         });
     }
 
-    //滚动到刷新状态
+    /**
+     * 滚动到刷新状态
+     */
     private void scrolltoRefreshStatus() {
+        isRefreshing=true;
         int start = getScrollY();
         int end = -header.getMeasuredHeight();
         performAnim(start, end, new AnimListener() {
@@ -193,7 +284,10 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         });
     }
 
-    //滚动到默认状态
+    /**
+     * 滚动到默认状态
+     * @param startStatus
+     */
     private void scrolltoDefaultStatus(final RefreshStatus startStatus) {
         int start = getScrollY();
         int end = 0;
@@ -210,24 +304,40 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         });
     }
 
-    //停止刷新
+    /**
+     * 停止刷新
+     * @param isSuccess
+     */
     public void stopRefresh(boolean isSuccess) {
         isRefreshSuccess = isSuccess;
+        isRefreshing=false;
         scrolltoDefaultStatus(RefreshStatus.REFRESH_COMPLETE_SCROLLING);
     }
 
-    //停止加载更多
+    /**
+     * 停止加载更多
+     * @param isSuccess
+     */
     public void stopLoadMore(boolean isSuccess) {
         isLoadSuccess = isSuccess;
+        isLoading=false;
         scrolltoDefaultStatus(RefreshStatus.LOADMORE_COMPLETE_SCROLLING);
     }
 
-    //执行滑动
+    /**
+     * 执行滑动
+     * @param dy
+     */
     public void performScroll(int dy) {
         scrollBy(0, (int) (-dy * damp));
     }
 
-    //执行动画
+    /**
+     * 执行动画
+     * @param start
+     * @param end
+     * @param listener
+     */
     private void performAnim(int start, int end, final AnimListener listener) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
         animator.setDuration(SCROLL_TIME).start();
@@ -265,7 +375,6 @@ public class RefreshLayout extends RefreshInterceptLauyout {
 
     interface AnimListener {
         void onDoing();
-
         void onEnd();
     }
 

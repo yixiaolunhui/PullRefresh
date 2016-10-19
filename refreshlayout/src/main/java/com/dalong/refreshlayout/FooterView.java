@@ -31,12 +31,12 @@ public class FooterView  extends FrameLayout implements RefreshFooter {
 
     @Override
     public void onLoadScrolling(int scrollY) {
-        tvPullUp.setText("准备加载");
+//        tvPullUp.setText("准备加载");
     }
 
     @Override
     public void onLoadDoing(int scrollY) {
-        tvPullUp.setText("正在加载……");
+        tvPullUp.setText("正在加载...");
     }
 
     @Override

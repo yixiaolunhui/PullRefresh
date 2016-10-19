@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initData();
         refreshview=(RefreshView)findViewById(R.id.refreshview);
+        refreshview.setAutoRefresh(true);
         listview=(ListView)findViewById(R.id.listview);
-        refreshview.setOnPullListener(new OnRefreshListener() {
+        refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Toast.makeText(MainActivity.this, "onRefresh", Toast.LENGTH_SHORT).show();
