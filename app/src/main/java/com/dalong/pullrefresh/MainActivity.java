@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        refreshview.stopRefresh(false);
+                        refreshview.stopRefresh(true);
                     }
                 },3000);
             }
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        refreshview.stopLoadMore(false);
+                        refreshview.stopLoadMore(true);
                     }
                 },3000);
             }
