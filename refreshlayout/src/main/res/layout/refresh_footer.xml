@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#f5f5f5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:text="上拉加载更多"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+</LinearLayout>
