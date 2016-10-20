@@ -6,14 +6,41 @@
     android:layout_height="match_parent"
     tools:context="com.dalong.pullrefresh.MainActivity">
 
-    <com.dalong.refreshlayout.RefreshView
+    <com.dalong.refreshlayout.DefaultRefreshView
         android:id="@+id/refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="50sp"
+                android:text="超级无敌大坏蛋"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                />
+
+            <ImageView
+                android:src="@mipmap/imge"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
         <ListView
             android:id="@+id/listview"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </com.dalong.refreshlayout.RefreshView>
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.dalong.refreshlayout.DefaultRefreshView>
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
 
@@ -54,6 +55,8 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
                         intercept = svPullDownIntercept(child);
                     } else if (child instanceof RecyclerView) {
                         intercept = rvPullDownIntercept(child);
+                    } else if (child instanceof WebView){
+                        intercept = wvPullDownIntercept(child);
                     }
                 } else if (y < lastYIntercept) { // 上拉操作
                     // 获取最底部的子视图
@@ -66,6 +69,8 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
                         intercept = svPullUpIntercept(child);
                     } else if (child instanceof RecyclerView) {
                         intercept = rvPullUpIntercept(child);
+                    } else if (child instanceof WebView){
+                        intercept = wvPullUpIntercept(child);
                     }
                 } else {
                     intercept = false;
@@ -83,6 +88,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         return intercept;
     }
 
+
+    /**
+     * 获取最后一个可见的子view
+     * @return
+     */
     private View getLastVisiableChild() {
         for (int i = lastChildIndex; i >= 0; i--) {
             View child = getChildAt(i);
@@ -95,6 +105,10 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         return null;
     }
 
+    /**
+     * 获取第一个可见的子view
+     * @return
+     */
     private View getFirstVisiableChild() {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
@@ -106,7 +120,39 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         }
         return null;
     }
+    /**
+     * 判别webview是否滚动到底部
+     * @param child
+     * @return
+     */
+    private boolean wvPullUpIntercept(View child) {
+        boolean intercept = false;
+        WebView webView = (WebView) child;
+        if(webView.getContentHeight()*webView.getScale()-(webView.getHeight()+webView.getScrollY())==0){
+            //已经处于底端
+            intercept = true;
+        }
+        return intercept;
+    }
 
+    /**
+     * 判别webview是否滚动到顶部
+     * @param child
+     * @return
+     */
+    private boolean wvPullDownIntercept(View child) {
+        boolean intercept = false;
+        if (child.getScrollY() <= 0) {
+            intercept = true;
+        }
+        return intercept;
+    }
+
+    /**
+     * 获取adapterView是否滚动到顶部
+     * @param child
+     * @return
+     */
     public boolean avPullDownIntercept(View child) {
         boolean intercept = true;
         AdapterView adapterChild = (AdapterView) child;
@@ -119,6 +165,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         return intercept;
     }
 
+    /**
+     * 获取adapterView是否滚动到底部
+     * @param child
+     * @return
+     */
     public boolean avPullUpIntercept(View child) {
         boolean intercept = false;
         AdapterView adapterChild = (AdapterView) child;
@@ -131,7 +182,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         }
         return intercept;
     }
-
+    /**
+     * 获取ScrollView是否滚动到顶部
+     * @param child
+     * @return
+     */
     public boolean svPullDownIntercept(View child) {
         boolean intercept = false;
         if (child.getScrollY() <= 0) {
@@ -139,7 +194,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         }
         return intercept;
     }
-
+    /**
+     * 获取ScrollView是否滚动到底部
+     * @param child
+     * @return
+     */
     public boolean svPullUpIntercept(View child) {
         boolean intercept = false;
         ScrollView scrollView = (ScrollView) child;
@@ -151,6 +210,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         return intercept;
     }
 
+    /**
+     * 获取RecyclerView是否滚动到顶部
+     * @param child
+     * @return
+     */
     public boolean rvPullDownIntercept(View child) {
         boolean intercept = false;
 
@@ -160,7 +224,11 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
 
         return intercept;
     }
-
+    /**
+     * 获取RecyclerView是否滚动到底部
+     * @param child
+     * @return
+     */
     public boolean rvPullUpIntercept(View child) {
         boolean intercept = false;
 

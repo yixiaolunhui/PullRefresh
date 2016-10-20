@@ -5,31 +5,44 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.dalong.refreshlayout.OnRefreshListener;
-import com.dalong.refreshlayout.RefreshView;
+import com.dalong.refreshlayout.DefaultRefreshView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RefreshView refreshview;
+    private DefaultRefreshView refreshview;
     private ListView listview;
 
     public List<String> list=new ArrayList<>();
+    private WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
-        refreshview=(RefreshView)findViewById(R.id.refreshview);
+        refreshview=(DefaultRefreshView)findViewById(R.id.refreshview);
         refreshview.setAutoRefresh(true);
         listview=(ListView)findViewById(R.id.listview);
+        webview=(WebView)findViewById(R.id.webview);
+        webview.loadUrl("http://baidu.com");
+        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+        webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                view.loadUrl(url);
+                return true;
+            }
+        });
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {

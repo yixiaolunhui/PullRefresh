@@ -8,13 +8,13 @@ import android.util.AttributeSet;
  * Created by zhouweilong on 2016/10/19.
  */
 
-public class RefreshView extends RefreshLayout {
+public class DefaultRefreshView extends RefreshLayout {
 
-    public RefreshView(Context context) {
+    public DefaultRefreshView(Context context) {
         super(context);
     }
 
-    public RefreshView(Context context, AttributeSet attrs) {
+    public DefaultRefreshView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -30,7 +30,6 @@ public class RefreshView extends RefreshLayout {
 
         addHeader(header);
         addFooter(footer);
-
         setHeader(header);
         setFooter(footer);
     }

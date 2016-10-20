@@ -9,7 +9,7 @@ import android.widget.TextView;
  * Created by zhouweilong on 2016/10/19.
  */
 
-public class FooterView  extends FrameLayout implements RefreshFooter {
+public class FooterView  extends FrameLayout implements OnFooterListener {
     public TextView tvPullUp;
 
     public FooterView(Context context) {

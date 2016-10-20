@@ -15,8 +15,8 @@ public class RefreshBaseLayout extends ViewGroup {
     public View header;
     public View footer;
 
-    public RefreshHeader pullHeader;
-    public RefreshFooter pullFooter;
+    public OnHeaderListener pullHeader;
+    public OnFooterListener pullFooter;
 
     public int bottomScroll;// 当滚动到内容最底部时Y轴所需要的滑动值
     public int lastChildIndex;// 最后一个childview的index
@@ -29,11 +29,11 @@ public class RefreshBaseLayout extends ViewGroup {
         super(context, attrs);
     }
 
-    public void setHeader(RefreshHeader pullHeader) {
+    public void setHeader(OnHeaderListener pullHeader) {
         this.pullHeader = pullHeader;
     }
 
-    public void setFooter(RefreshFooter pullFooter) {
+    public void setFooter(OnFooterListener pullFooter) {
         this.pullFooter = pullFooter;
     }
 

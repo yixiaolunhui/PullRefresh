@@ -9,7 +9,7 @@ import android.widget.TextView;
  * Created by zhouweilong on 2016/10/19.
  */
 
-public class HeaderView extends FrameLayout implements RefreshHeader {
+public class HeaderView extends FrameLayout implements OnHeaderListener {
 
     public TextView tvPullDown;
 

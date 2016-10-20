@@ -1,6 +1,7 @@
 package com.dalong.refreshlayout;
 
 /**
+ * 下拉刷新和加载更多状态
  * Created by zhouweilong on 2016/10/19.
  */
 

@@ -1,10 +1,11 @@
 package com.dalong.refreshlayout;
 
 /**
+ * 加载更多接口
  * Created by zhouweilong on 2016/10/19.
  */
 
-public interface RefreshFooter {
+public interface OnFooterListener {
 
     //上拉加载
     void onUpBefore(int scrollY);
