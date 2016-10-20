@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(MainActivity.this, "onRefresh", Toast.LENGTH_SHORT).show();
+                Log.v("111111","onRefresh");
                 mHandler.removeMessages(0);
-                mHandler.sendEmptyMessageDelayed(0,10000);
+                mHandler.sendEmptyMessageDelayed(0,3000);
             }
 
             @Override
             public void onLoadMore() {
-                Toast.makeText(MainActivity.this, "onLoadMore", Toast.LENGTH_SHORT).show();
+                Log.v("111111","onLoadMore");
                 mHandler.removeMessages(1);
-                mHandler.sendEmptyMessageDelayed(1,10000);
+                mHandler.sendEmptyMessageDelayed(1,3000);
             }
         });
 

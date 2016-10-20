@@ -20,7 +20,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     // Layout状态
     private RefreshStatus status = RefreshStatus.DEFAULT;
     //阻尼系数
-    private float damp = 0.3f;
+    private float damp = 0.4f;
     //恢复动画的执行时间
     public int SCROLL_TIME = 300;
     //是否刷新完成
@@ -125,7 +125,6 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 int dy = y - lastYMove;
                 // 如果getScrollY<0，即下拉操作
                 if (getScrollY() < 0) {
-                    Log.v("111111","isRefreshing:"+isRefreshing);
                     if (header != null&&isCanRefresh&&!isLoading&&!isRefreshing) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
@@ -138,7 +137,6 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 }
                 // 如果getScrollY>=0，即上拉操作
                 else {
-                    Log.v("111111","isLoading:"+isLoading);
                     if (footer != null&&isCanLoad&&!isRefreshing&&!isLoading) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
