@@ -34,9 +34,9 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     //是否自动下拉刷新
     private boolean isAutoRefresh=false;
     //正在加载中
-    private boolean isLoading=false;
+    public boolean isLoading=false;
     //正在刷新中
-    private boolean isRefreshing=false;
+    public boolean isRefreshing=false;
 
     public RefreshLayout(Context context) {
         super(context);
@@ -68,7 +68,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
      */
     public void setAutoRefresh(boolean isAutoRefresh){
         this.isAutoRefresh=isAutoRefresh;
-        if(isAutoRefresh)autoRefresh();
+        autoRefresh();
     }
 
 
@@ -76,6 +76,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
      * 自动刷新
      */
     public void autoRefresh(){
+        if(!isAutoRefresh)return;
         isRefreshing=true;
         measureView(header);
         int end = header.getMeasuredHeight();
@@ -124,7 +125,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 int dy = y - lastYMove;
                 // 如果getScrollY<0，即下拉操作
                 if (getScrollY() < 0) {
-                    if (header != null&&isCanRefresh&&!isLoading) {
+                    Log.v("111111","isRefreshing:"+isRefreshing);
+                    if (header != null&&isCanRefresh&&!isLoading&&!isRefreshing) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (Math.abs(getScrollY()) > header.getMeasuredHeight()) {
@@ -136,7 +138,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 }
                 // 如果getScrollY>=0，即上拉操作
                 else {
-                    if (footer != null&&isCanLoad&&!isRefreshing) {
+                    Log.v("111111","isLoading:"+isLoading);
+                    if (footer != null&&isCanLoad&&!isRefreshing&&!isLoading) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {
@@ -203,7 +206,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 break;
             case REFRESH_DOING:
                 pullHeader.onRefreshDoing(scrollY);
-                listener.onRefresh();
+                if(listener!=null)
+                    listener.onRefresh();
                 break;
             case REFRESH_COMPLETE_SCROLLING:
                 pullHeader.onRefreshCompleteScrolling(scrollY, isRefreshSuccess);
@@ -223,7 +227,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 break;
             case LOADMORE_DOING:
                 pullFooter.onLoadDoing(scrollY);
-                listener.onLoadMore();
+                if(listener!=null)
+                    listener.onLoadMore();
                 break;
             case LOADMORE_COMPLETE_SCROLLING:
                 pullFooter.onLoadCompleteScrolling(scrollY, isLoadSuccess);
@@ -252,13 +257,11 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         performAnim(start, end, new AnimListener() {
             @Override
             public void onDoing() {
-                isLoading=true;
                 updateStatus(status.LOADMORE_SCROLLING);
             }
 
             @Override
             public void onEnd() {
-                isLoading=false;
                 updateStatus(status.LOADMORE_DOING);
             }
         });

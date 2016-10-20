@@ -1,6 +1,7 @@
 package com.dalong.pullrefresh;
 
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview;
 
     public List<String> list=new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,23 +33,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 Toast.makeText(MainActivity.this, "onRefresh", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshview.stopRefresh(true);
-                    }
-                },3000);
+                mHandler.removeMessages(0);
+                mHandler.sendEmptyMessageDelayed(0,10000);
             }
 
             @Override
             public void onLoadMore() {
                 Toast.makeText(MainActivity.this, "onLoadMore", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshview.stopLoadMore(true);
-                    }
-                },3000);
+                mHandler.removeMessages(1);
+                mHandler.sendEmptyMessageDelayed(1,10000);
             }
         });
 
@@ -55,7 +49,20 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, list));
     }
 
-
+    Handler mHandler= new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    refreshview.stopRefresh(true);
+                    break;
+                case 1:
+                    refreshview.stopLoadMore(true);
+                    break;
+            }
+        }
+    };
 
     public void initData(){
         for (int i=0;i<16;i++){

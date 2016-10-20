@@ -18,7 +18,6 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
     public int lastYMove;
     // 用于判断是否拦截触摸事件的Y坐标中介
     public int lastYIntercept;
-
     public RefreshInterceptLauyout(Context context) {
         super(context);
     }
