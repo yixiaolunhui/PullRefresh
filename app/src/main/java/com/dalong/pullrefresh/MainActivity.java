@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         initData();
         refreshview=(MeiTuanRefreshView)findViewById(R.id.refreshview);
         listview=(ListView)findViewById(R.id.listview);
+        refreshview.setAutoRefresh(true);
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {

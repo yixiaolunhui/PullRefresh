@@ -21,6 +21,14 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 
 
 ##Usage
+
+Use  it in your gradle
+
+    dependencies {
+       compile 'com.dalong:refreshlayout:1.0.0'
+    }
+
+
 Use it in your layout xml.
 
         <com.dalong.pullrefresh.view.meituan.MeiTuanRefreshView
