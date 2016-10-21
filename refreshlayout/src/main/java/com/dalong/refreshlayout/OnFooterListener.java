@@ -32,7 +32,7 @@ public interface OnFooterListener {
     void onLoading(int scrollY);
 
     /**
-     * 加载完成后
+     * 加载完成后 分成功和失败两个状态
      * @param scrollY
      * @param isLoadSuccess 加载的状态  是成功了 还是失败了
      */

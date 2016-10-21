@@ -80,8 +80,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         int end = header.getMeasuredHeight();
         performAnim(0, -end, new AnimListener() {
             @Override
-            public void onDoing() {
-                updateStatus(status.REFRESH_SCROLLING);
+            public void onGoing() {
+                updateStatus(status.REFRESH_READY);
             }
 
             @Override
@@ -127,9 +127,9 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (Math.abs(getScrollY()) > header.getMeasuredHeight()) {
-                            updateStatus(status.DOWN_AFTER);
+                            updateStatus(status.REFRESH_AFTER);
                         } else {
-                            updateStatus(status.DOWN_BEFORE);
+                            updateStatus(status.REFRESH_BEFORE);
                         }
                     }
                 }
@@ -139,9 +139,9 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {
-                            updateStatus(status.UP_AFTER);
+                            updateStatus(status.LOAD_AFTER);
                         } else {
-                            updateStatus(status.UP_BEFORE);
+                            updateStatus(status.LOAD_BEFORE);
                         }
                     }
                 }
@@ -154,17 +154,17 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 // 判断本次触摸系列事件结束时,Layout的状态
                 switch (status) {
                     //下拉刷新
-                    case DOWN_BEFORE:
-                        scrolltoDefaultStatus(status.REFRESH_CANCEL_SCROLLING);
+                    case REFRESH_BEFORE:
+                        scrolltoDefaultStatus(status.REFRESH_CANCEL);
                         break;
-                    case DOWN_AFTER:
+                    case REFRESH_AFTER:
                         scrolltoRefreshStatus();
                         break;
                     //上拉加载更多
-                    case UP_BEFORE:
-                        scrolltoDefaultStatus(status.LOADMORE_CANCEL_SCROLLING);
+                    case LOAD_BEFORE:
+                        scrolltoDefaultStatus(status.LOAD_CANCEL);
                         break;
-                    case UP_AFTER:
+                    case LOAD_AFTER:
                         scrolltoLoadStatus();
                         break;
                     default:
@@ -191,46 +191,56 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 onDefault();
                 break;
             //下拉刷新
-            case DOWN_BEFORE:
-                pullHeader.onRefreshBefore(scrollY);
+            case REFRESH_BEFORE:
+                mOnHeaderListener.onRefreshBefore(scrollY);
                 break;
-            case DOWN_AFTER:
-                pullHeader.onRefreshAfter(scrollY);
+            //松手刷新
+            case REFRESH_AFTER:
+                mOnHeaderListener.onRefreshAfter(scrollY);
                 break;
-            case REFRESH_SCROLLING:
-                pullHeader.onRefreshReady(scrollY);
+            //准备刷新
+            case REFRESH_READY:
+                mOnHeaderListener.onRefreshReady(scrollY);
                 break;
+            //刷新中
             case REFRESH_DOING:
-                pullHeader.onRefreshing(scrollY);
+                mOnHeaderListener.onRefreshing(scrollY);
                 if(listener!=null)
                     listener.onRefresh();
                 break;
-            case REFRESH_COMPLETE_SCROLLING:
-                pullHeader.onRefreshComplete(scrollY, isRefreshSuccess);
+            //刷新完成
+            case REFRESH_COMPLETE:
+                mOnHeaderListener.onRefreshComplete(scrollY, isRefreshSuccess);
                 break;
-            case REFRESH_CANCEL_SCROLLING:
-                pullHeader.onRefreshCancel(scrollY);
+            //取消刷新
+            case REFRESH_CANCEL:
+                mOnHeaderListener.onRefreshCancel(scrollY);
                 break;
             //上拉加载更多
-            case UP_BEFORE:
-                pullFooter.onLoadBefore(scrollY);
+            case LOAD_BEFORE:
+                mOnFooterListener.onLoadBefore(scrollY);
                 break;
-            case UP_AFTER:
-                pullFooter.onLoadAfter(scrollY);
+            //松手加载
+            case LOAD_AFTER:
+                mOnFooterListener.onLoadAfter(scrollY);
                 break;
-            case LOADMORE_SCROLLING:
-                pullFooter.onLoadReady(scrollY);
+            //准备加载
+            case LOAD_READY:
+                mOnFooterListener.onLoadReady(scrollY);
                 break;
-            case LOADMORE_DOING:
-                pullFooter.onLoading(scrollY);
+            //加载中
+            case LOAD_DOING:
+                mOnFooterListener.onLoading(scrollY);
                 if(listener!=null)
                     listener.onLoadMore();
                 break;
-            case LOADMORE_COMPLETE_SCROLLING:
-                pullFooter.onLoadComplete(scrollY, isLoadSuccess);
+            //加载完成
+            case LOAD_COMPLETE:
+                mOnFooterListener.onLoadComplete(scrollY, isLoadSuccess);
                 break;
-            case LOADMORE_CANCEL_SCROLLING:
-                pullFooter.onLoadCancel(scrollY);
+            //取消加载
+            case LOAD_CANCEL:
+                mOnFooterListener.onLoadCancel(scrollY);
                 break;
         }
     }
@@ -252,13 +262,13 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         int end = footer.getMeasuredHeight() + bottomScroll;
         performAnim(start, end, new AnimListener() {
             @Override
-            public void onDoing() {
-                updateStatus(status.LOADMORE_SCROLLING);
+            public void onGoing() {
+                updateStatus(status.LOAD_READY);
             }
 
             @Override
             public void onEnd() {
-                updateStatus(status.LOADMORE_DOING);
+                updateStatus(status.LOAD_DOING);
             }
         });
     }
@@ -272,8 +282,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         int end = -header.getMeasuredHeight();
         performAnim(start, end, new AnimListener() {
             @Override
-            public void onDoing() {
-                updateStatus(status.REFRESH_SCROLLING);
+            public void onGoing() {
+                updateStatus(status.REFRESH_READY);
             }
 
             @Override
@@ -292,7 +302,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         int end = 0;
         performAnim(start, end, new AnimListener() {
             @Override
-            public void onDoing() {
+            public void onGoing() {
                 updateStatus(startStatus);
             }
 
@@ -310,7 +320,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     public void stopRefresh(boolean isSuccess) {
         isRefreshSuccess = isSuccess;
         isRefreshing=false;
-        scrolltoDefaultStatus(RefreshStatus.REFRESH_COMPLETE_SCROLLING);
+        scrolltoDefaultStatus(RefreshStatus.REFRESH_COMPLETE);
     }
 
     /**
@@ -320,7 +330,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     public void stopLoadMore(boolean isSuccess) {
         isLoadSuccess = isSuccess;
         isLoading=false;
-        scrolltoDefaultStatus(RefreshStatus.LOADMORE_COMPLETE_SCROLLING);
+        scrolltoDefaultStatus(RefreshStatus.LOAD_COMPLETE);
     }
 
     /**
@@ -346,7 +356,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 int value = (int) animation.getAnimatedValue();
                 scrollTo(0, value);
                 postInvalidate();
-                listener.onDoing();
+                listener.onGoing();
             }
         });
         animator.addListener(new Animator.AnimatorListener() {
@@ -373,7 +383,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     }
 
     interface AnimListener {
-        void onDoing();
+        void onGoing();
         void onEnd();
     }
 

@@ -34,7 +34,7 @@ public class MeiTuanRefreshView extends RefreshLayout {
 
         addHeader(header);
         addFooter(footer);
-        setHeader(header);
-        setFooter(footer);
+        setOnHeaderListener(header);
+        setOnFooterListener(footer);
     }
 }

@@ -9,18 +9,21 @@ public enum RefreshStatus {
 
     DEFAULT,//默认状态
 
-    DOWN_BEFORE,//下拉中，到达有效刷新距离前
-    DOWN_AFTER,//下拉中，到达有效刷新距离后
-    REFRESH_SCROLLING,//放手后，开始刷新前，回到刷新的位置中
-    REFRESH_DOING,//正在刷新中
-    REFRESH_COMPLETE_SCROLLING,//刷新完成后，回到默认状态中
-    REFRESH_CANCEL_SCROLLING,//刷新取消后，回到默认状态中
+    /**
+     * 刷新状态
+     */
+    REFRESH_BEFORE,   // 下拉刷新中  还没有达到可以刷新之前的时候
+    REFRESH_AFTER,    // 松开刷新    下拉已经到达可以刷新的时候
+    REFRESH_READY,    // 准备刷新状态 达到可以刷新的时候松开手指回到刷新的位置状态
+    REFRESH_DOING,    // 正在刷新中
+    REFRESH_COMPLETE, // 刷新完成    分刷新成功和失败
+    REFRESH_CANCEL,   // 取消刷新    没有超过可刷新的距离
 
-    UP_BEFORE,//上拉中，到达有效刷新距离前
-    UP_AFTER,//上拉中，到达有效刷新距离后
-    LOADMORE_SCROLLING,//放手后，开始加载前，从手势位置回到加载的位置中
-    LOADMORE_DOING,//正在加载中
-    LOADMORE_COMPLETE_SCROLLING,//加载完成后，回到默认状态中
-    LOADMORE_CANCEL_SCROLLING,//加载取消后，回到默认状态中
+    LOAD_BEFORE,      // 上拉加载    还没有达到可以加载之前的时候
+    LOAD_AFTER,       // 松开加载    上拉已经到达可以刷新的时候
+    LOAD_READY,       // 准备加载    达到可以加载的时候松开手指回到加载的位置状态
+    LOAD_DOING,       // 正在加载中
+    LOAD_COMPLETE,    // 加载完成后   分成功和失败两个状态
+    LOAD_CANCEL,      // 取消加载
 
 }

@@ -13,15 +13,14 @@ import android.widget.ScrollView;
 
 public class RefreshBaseLayout extends ViewGroup {
 
-
     //头部布局
     public View header;
     //底部布局
     public View footer;
     //头部下拉监听接口
-    public OnHeaderListener pullHeader;
+    public OnHeaderListener mOnHeaderListener;
     //底部上啦监听接口
-    public OnFooterListener pullFooter;
+    public OnFooterListener mOnFooterListener;
     // 当滚动到内容最底部时Y轴所需要的滑动值
     public int bottomScroll;
     // 最后一个childview的index
@@ -37,18 +36,18 @@ public class RefreshBaseLayout extends ViewGroup {
 
     /**
      * 设置头部监听回调
-     * @param pullHeader
+     * @param mOnHeaderListener
      */
-    public void setHeader(OnHeaderListener pullHeader) {
-        this.pullHeader = pullHeader;
+    public void setOnHeaderListener(OnHeaderListener mOnHeaderListener) {
+        this.mOnHeaderListener = mOnHeaderListener;
     }
 
     /**
      * 设置底部监听回调
-     * @param pullFooter
+     * @param mOnFooterListener
      */
-    public void setFooter(OnFooterListener pullFooter) {
-        this.pullFooter = pullFooter;
+    public void setOnFooterListener(OnFooterListener mOnFooterListener) {
+        this.mOnFooterListener = mOnFooterListener;
     }
 
     @Override
@@ -119,9 +118,7 @@ public class RefreshBaseLayout extends ViewGroup {
             // 头视图隐藏在ViewGroup的顶端
             if (child == header) {
                 child.layout(0, 0 - child.getMeasuredHeight(), child.getMeasuredWidth(), 0);
-            }
-            // 尾视图隐藏在ViewGroup所有内容视图之后
-            else if (child == footer) {
+            } else if (child == footer) {// 尾视图隐藏在ViewGroup所有内容视图之后
                 child.layout(0, contentHeight, child.getMeasuredWidth(), contentHeight + child.getMeasuredHeight());
             }
             // 内容视图根据定义(插入)顺序,按由上到下的顺序在垂直方向进行排列
