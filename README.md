@@ -51,7 +51,7 @@ Get instance and use it.
 
 
 ##Thanks
-    * [BeautifulRefreshLayout](https://github.com/android-cjj/BeautifulRefreshLayout)
-    * [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh) 
-    * [SmartRefreshLayout]( https://github.com/RawnHwang/SmartRefreshLayout) 
+* [BeautifulRefreshLayout](https://github.com/android-cjj/BeautifulRefreshLayout)
+* [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh) 
+* [SmartRefreshLayout]( https://github.com/RawnHwang/SmartRefreshLayout) 
 
