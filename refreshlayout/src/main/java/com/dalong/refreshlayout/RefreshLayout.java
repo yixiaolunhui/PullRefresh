@@ -3,9 +3,7 @@ package com.dalong.refreshlayout;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -194,45 +192,45 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 break;
             //下拉刷新
             case DOWN_BEFORE:
-                pullHeader.onDownBefore(scrollY);
+                pullHeader.onRefreshBefore(scrollY);
                 break;
             case DOWN_AFTER:
-                pullHeader.onDownAfter(scrollY);
+                pullHeader.onRefreshAfter(scrollY);
                 break;
             case REFRESH_SCROLLING:
-                pullHeader.onRefreshScrolling(scrollY);
+                pullHeader.onRefreshReady(scrollY);
                 break;
             case REFRESH_DOING:
-                pullHeader.onRefreshDoing(scrollY);
+                pullHeader.onRefreshing(scrollY);
                 if(listener!=null)
                     listener.onRefresh();
                 break;
             case REFRESH_COMPLETE_SCROLLING:
-                pullHeader.onRefreshCompleteScrolling(scrollY, isRefreshSuccess);
+                pullHeader.onRefreshComplete(scrollY, isRefreshSuccess);
                 break;
             case REFRESH_CANCEL_SCROLLING:
-                pullHeader.onRefreshCancelScrolling(scrollY);
+                pullHeader.onRefreshCancel(scrollY);
                 break;
             //上拉加载更多
             case UP_BEFORE:
-                pullFooter.onUpBefore(scrollY);
+                pullFooter.onLoadBefore(scrollY);
                 break;
             case UP_AFTER:
-                pullFooter.onUpAfter(scrollY);
+                pullFooter.onLoadAfter(scrollY);
                 break;
             case LOADMORE_SCROLLING:
-                pullFooter.onLoadScrolling(scrollY);
+                pullFooter.onLoadReady(scrollY);
                 break;
             case LOADMORE_DOING:
-                pullFooter.onLoadDoing(scrollY);
+                pullFooter.onLoading(scrollY);
                 if(listener!=null)
                     listener.onLoadMore();
                 break;
             case LOADMORE_COMPLETE_SCROLLING:
-                pullFooter.onLoadCompleteScrolling(scrollY, isLoadSuccess);
+                pullFooter.onLoadComplete(scrollY, isLoadSuccess);
                 break;
             case LOADMORE_CANCEL_SCROLLING:
-                pullFooter.onLoadCancelScrolling(scrollY);
+                pullFooter.onLoadCancel(scrollY);
                 break;
         }
     }

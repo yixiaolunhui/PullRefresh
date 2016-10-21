@@ -6,46 +6,71 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**
+ * 默认的下拉刷新头部   可以按照这个例子 自定义头部
  * Created by zhouweilong on 2016/10/19.
  */
 
 public class HeaderView extends FrameLayout implements OnHeaderListener {
 
-    public TextView tvPullDown;
+    public TextView mRefreshTv;
 
     public HeaderView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.refresh_header, this, true);
-        tvPullDown = (TextView) findViewById(R.id.tv);
+        mRefreshTv = (TextView) findViewById(R.id.tv);
     }
 
+    /**
+     * 下拉刷新
+     * @param scrollY
+     */
     @Override
-    public void onDownBefore(int scrollY) {
-        tvPullDown.setText("下拉刷新");
+    public void onRefreshBefore(int scrollY) {
+        mRefreshTv.setText("下拉刷新");
     }
 
+    /**
+     * 松开刷新
+     * @param scrollY
+     */
     @Override
-    public void onDownAfter(int scrollY) {
-        tvPullDown.setText("松开刷新");
+    public void onRefreshAfter(int scrollY) {
+        mRefreshTv.setText("松开刷新");
+    }
+    /**
+     * 准备刷新
+     * @param scrollY
+     */
+    @Override
+    public void onRefreshReady(int scrollY) {
+
     }
 
+    /**
+     * 正在刷新
+     * @param scrollY
+     */
     @Override
-    public void onRefreshScrolling(int scrollY) {
-//        tvPullDown.setText("准备刷新");
+    public void onRefreshing(int scrollY) {
+        mRefreshTv.setText("正在刷新");
     }
 
+    /**
+     * 刷新成功
+     * @param scrollY
+     * @param isRefreshSuccess  刷新的状态  是成功了 还是失败了
+     */
     @Override
-    public void onRefreshDoing(int scrollY) {
-        tvPullDown.setText("正在刷新...");
+    public void onRefreshComplete(int scrollY, boolean isRefreshSuccess) {
+        mRefreshTv.setText(isRefreshSuccess ? "刷新成功" : "刷新失败");
     }
 
+    /**
+     * 取消刷新
+     * @param scrollY
+     */
     @Override
-    public void onRefreshCompleteScrolling(int scrollY, boolean isLoadSuccess) {
-        tvPullDown.setText(isLoadSuccess ? "刷新成功" : "刷新失败");
-    }
-
-    @Override
-    public void onRefreshCancelScrolling(int scrollY) {
-        tvPullDown.setText("取消刷新");
+    public void onRefreshCancel(int scrollY) {
+        mRefreshTv.setText("取消刷新");
     }
 }

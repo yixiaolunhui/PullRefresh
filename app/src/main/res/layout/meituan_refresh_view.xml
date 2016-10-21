@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.dalong.pullrefresh.view.MeiTuanHeader
+    <com.dalong.pullrefresh.view.meituan.MeiTuanHeader
         android:id="@+id/meiTuanView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible" />
-    </com.dalong.pullrefresh.view.MeiTuanHeader>
+    </com.dalong.pullrefresh.view.meituan.MeiTuanHeader>
 
 </LinearLayout>

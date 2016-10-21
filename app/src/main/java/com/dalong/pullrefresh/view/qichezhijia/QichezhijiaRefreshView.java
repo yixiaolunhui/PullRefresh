@@ -1,24 +1,24 @@
-package com.dalong.pullrefresh.view;
+package com.dalong.pullrefresh.view.qichezhijia;
 
 
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.dalong.pullrefresh.view.meituan.MeiTuanHeader;
 import com.dalong.refreshlayout.FooterView;
-import com.dalong.refreshlayout.HeaderView;
 import com.dalong.refreshlayout.RefreshLayout;
 
 /**
  * Created by zhouweilong on 2016/10/19.
  */
 
-public class MeiTuanRefreshView extends RefreshLayout {
+public class QichezhijiaRefreshView extends RefreshLayout {
 
-    public MeiTuanRefreshView(Context context) {
+    public QichezhijiaRefreshView(Context context) {
         super(context);
     }
 
-    public MeiTuanRefreshView(Context context, AttributeSet attrs) {
+    public QichezhijiaRefreshView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -29,7 +29,7 @@ public class MeiTuanRefreshView extends RefreshLayout {
     }
 
     public void init() {
-        MeiTuanHeader header = new MeiTuanHeader(getContext());
+        QiCheZhiJiaHeader header = new QiCheZhiJiaHeader(getContext());
         FooterView footer = new FooterView(getContext());
 
         addHeader(header);

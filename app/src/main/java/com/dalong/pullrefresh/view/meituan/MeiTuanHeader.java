@@ -1,10 +1,9 @@
-package com.dalong.pullrefresh.view;
+package com.dalong.pullrefresh.view.meituan;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,6 +12,7 @@ import com.dalong.pullrefresh.R;
 import com.dalong.refreshlayout.OnHeaderListener;
 
 /**
+ * 美团加载头部
  * Created by zhouweilong on 2016/10/21.
  */
 
@@ -45,7 +45,6 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
         ViewCompat.setScaleX(mPullDownView, scale);
         ViewCompat.setPivotY(mPullDownView, mPullDownView.getHeight());
         ViewCompat.setScaleY(mPullDownView, scale);
-        Log.v("111111","scale:"+scale);
         if(scale>=0.8f){
             changeToReleaseRefresh();
         }else{
@@ -108,13 +107,13 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
     }
 
     @Override
-    public void onDownBefore(int scrollY) {
+    public void onRefreshBefore(int scrollY) {
         changeToPullDown();
         handleScale(Math.abs(scrollY)/(1.0f*getHeight()));
     }
 
     @Override
-    public void onDownAfter(int scrollY) {
+    public void onRefreshAfter(int scrollY) {
     }
 
     /**
@@ -122,22 +121,22 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshScrolling(int scrollY) {
+    public void onRefreshReady(int scrollY) {
     }
 
     @Override
-    public void onRefreshDoing(int scrollY) {
+    public void onRefreshing(int scrollY) {
         changeToRefreshing();
     }
 
     @Override
-    public void onRefreshCompleteScrolling(int scrollY, boolean isRefreshSuccess) {
+    public void onRefreshComplete(int scrollY, boolean isRefreshSuccess) {
         onEndRefreshing();
         changeToIdle();
     }
 
     @Override
-    public void onRefreshCancelScrolling(int scrollY) {
+    public void onRefreshCancel(int scrollY) {
         onEndRefreshing();
         changeToIdle();
     }

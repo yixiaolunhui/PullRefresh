@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 
 /**
+ * 这个类主要是对子view的顶部和底部的判别  触摸事件处理
  * Created by zhouweilong on 2016/10/19.
  */
 

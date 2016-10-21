@@ -7,9 +7,13 @@ package com.dalong.refreshlayout;
 
 public interface OnRefreshListener {
 
-    //执行刷新
+    /**
+     * 刷新回调
+     */
     void onRefresh();
 
-    //执行加载更多
+    /**
+     * 加载更多回调
+     */
     void onLoadMore();
 }
