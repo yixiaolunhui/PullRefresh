@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.dalong.pullrefresh.view.meituan.MeiTuanRefreshView;
-import com.dalong.pullrefresh.view.qichezhijia.QichezhijiaRefreshView;
 import com.dalong.refreshlayout.OnRefreshListener;
 
 import java.util.ArrayList;

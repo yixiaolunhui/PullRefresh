@@ -7,19 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 /**
+ * 自定义viewgrop 添加头部和底部 默认隐藏头和底部
  * Created by zhouweilong on 2016/10/19.
  */
 
 public class RefreshBaseLayout extends ViewGroup {
 
+
+    //头部布局
     public View header;
+    //底部布局
     public View footer;
-
+    //头部下拉监听接口
     public OnHeaderListener pullHeader;
+    //底部上啦监听接口
     public OnFooterListener pullFooter;
-
-    public int bottomScroll;// 当滚动到内容最底部时Y轴所需要的滑动值
-    public int lastChildIndex;// 最后一个childview的index
+    // 当滚动到内容最底部时Y轴所需要的滑动值
+    public int bottomScroll;
+    // 最后一个childview的index
+    public int lastChildIndex;
 
     public RefreshBaseLayout(Context context) {
         super(context);
@@ -29,10 +35,18 @@ public class RefreshBaseLayout extends ViewGroup {
         super(context, attrs);
     }
 
+    /**
+     * 设置头部监听回调
+     * @param pullHeader
+     */
     public void setHeader(OnHeaderListener pullHeader) {
         this.pullHeader = pullHeader;
     }
 
+    /**
+     * 设置底部监听回调
+     * @param pullFooter
+     */
     public void setFooter(OnFooterListener pullFooter) {
         this.pullFooter = pullFooter;
     }
@@ -40,33 +54,41 @@ public class RefreshBaseLayout extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        //获取最后一个子view的index 等于所有子view的数量-1
         lastChildIndex = getChildCount() - 1;
     }
 
     /**
      * 添加上拉刷新布局作为header
+     * @param header 头布局
      */
     public void addHeader(View header) {
         this.header = header;
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT);
         addView(header, layoutParams);
     }
 
     /**
      * 添加下拉加载布局作为footer
+     * @param footer 底布局
      */
     public void addFooter(View footer) {
         this.footer = footer;
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT);
         addView(footer, layoutParams);
     }
 
+    /**
+     * 测量方法  遍历左右子view进行测量  当子view显示状态为GONE的时候不测量
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        // 遍历进行子视图的测量工作
         for (int i = 0; i < getChildCount(); i++) {
-            // 通知子视图进行测量
             View child = getChildAt(i);
             if (child.getVisibility() == GONE) {
                 continue;
@@ -75,6 +97,14 @@ public class RefreshBaseLayout extends ViewGroup {
         }
     }
 
+    /**
+     * 遍历所有子view 区分头部放置viewgrop的上面 底部放置viewgrop的下面 剩下的按顺序摆放
+     * @param changed
+     * @param l
+     * @param t
+     * @param r
+     * @param b
+     */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         // 重置(避免重复累加)
