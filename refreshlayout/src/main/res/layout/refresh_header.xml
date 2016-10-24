@@ -8,12 +8,20 @@
         android:src="@drawable/ic_launcher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv"
+
+    <LinearLayout
+        android:id="@+id/refresh_header_content"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:gravity="center"
-        android:text="下拉刷新"
-        android:textColor="#000000"
-        android:textSize="16sp"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:gravity="center"
+            android:text="下拉刷新"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
 </LinearLayout>

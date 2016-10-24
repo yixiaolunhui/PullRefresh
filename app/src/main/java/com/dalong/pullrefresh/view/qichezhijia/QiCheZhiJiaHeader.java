@@ -68,7 +68,7 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
      * @param scrollY
      */
     @Override
-    public void onRefreshBefore(int scrollY) {
+    public void onRefreshBefore(int scrollY,int  refreshHeight,int headerHeight) {
         mQicheZjView.setCurrentProgress(Math.abs(scrollY)/(1.0f*getHeight()));
         mQicheZjView.postInvalidate();
         changeHeaderByState(PULL_TO_REFRESH);
@@ -79,12 +79,12 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
      * @param scrollY
      */
     @Override
-    public void onRefreshAfter(int scrollY) {
+    public void onRefreshAfter(int scrollY,int  refreshHeight,int headerHeight) {
         changeHeaderByState(RELEASE_TO_REFRESH);
     }
 
     @Override
-    public void onRefreshReady(int scrollY) {
+    public void onRefreshReady(int scrollY,int refreshHeight,int headerHeight) {
 
     }
 
@@ -93,7 +93,7 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
      * @param scrollY
      */
     @Override
-    public void onRefreshing(int scrollY) {
+    public void onRefreshing(int scrollY,int refreshHeight,int headerHeight) {
         changeHeaderByState(REFRESHING);
     }
 
@@ -103,7 +103,7 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
      * @param isRefreshSuccess  刷新的状态  是成功了 还是失败了
      */
     @Override
-    public void onRefreshComplete(int scrollY, boolean isRefreshSuccess) {
+    public void onRefreshComplete(int scrollY,int refreshHeight,int headerHeight, boolean isRefreshSuccess) {
         changeHeaderByState(DONE);
     }
 
@@ -112,7 +112,7 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
      * @param scrollY
      */
     @Override
-    public void onRefreshCancel(int scrollY) {
+    public void onRefreshCancel(int scrollY,int refreshHeight,int headerHeight) {
         changeHeaderByState(DONE);
     }
 

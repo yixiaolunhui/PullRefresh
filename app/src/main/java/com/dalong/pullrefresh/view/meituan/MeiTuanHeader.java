@@ -107,13 +107,13 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
     }
 
     @Override
-    public void onRefreshBefore(int scrollY) {
+    public void onRefreshBefore(int scrollY,int refreshHeight,int headerHeight) {
         changeToPullDown();
-        handleScale(Math.abs(scrollY)/(1.0f*getHeight()));
+        handleScale(Math.abs(scrollY)/(1.0f*refreshHeight));
     }
 
     @Override
-    public void onRefreshAfter(int scrollY) {
+    public void onRefreshAfter(int scrollY,int refreshHeight,int headerHeight) {
     }
 
     /**
@@ -121,22 +121,22 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshReady(int scrollY) {
+    public void onRefreshReady(int scrollY,int refreshHeight,int headerHeight) {
     }
 
     @Override
-    public void onRefreshing(int scrollY) {
+    public void onRefreshing(int scrollY,int refreshHeight,int headerHeight) {
         changeToRefreshing();
     }
 
     @Override
-    public void onRefreshComplete(int scrollY, boolean isRefreshSuccess) {
+    public void onRefreshComplete(int scrollY,int refreshHeight,int headerHeight, boolean isRefreshSuccess) {
         onEndRefreshing();
         changeToIdle();
     }
 
     @Override
-    public void onRefreshCancel(int scrollY) {
+    public void onRefreshCancel(int scrollY,int refreshHeight,int headerHeight) {
         onEndRefreshing();
         changeToIdle();
     }

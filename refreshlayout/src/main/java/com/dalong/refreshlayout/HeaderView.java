@@ -25,7 +25,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshBefore(int scrollY) {
+    public void onRefreshBefore(int scrollY,int refreshHeight,int headerHeight) {
         mRefreshTv.setText("下拉刷新");
     }
 
@@ -34,7 +34,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshAfter(int scrollY) {
+    public void onRefreshAfter(int scrollY,int refreshHeight,int headerHeight) {
         mRefreshTv.setText("松开刷新");
     }
     /**
@@ -42,7 +42,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshReady(int scrollY) {
+    public void onRefreshReady(int scrollY,int refreshHeight,int headerHeight) {
 
     }
 
@@ -51,7 +51,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshing(int scrollY) {
+    public void onRefreshing(int scrollY,int refreshHeight,int headerHeight) {
         mRefreshTv.setText("正在刷新");
     }
 
@@ -61,7 +61,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param isRefreshSuccess  刷新的状态  是成功了 还是失败了
      */
     @Override
-    public void onRefreshComplete(int scrollY, boolean isRefreshSuccess) {
+    public void onRefreshComplete(int scrollY,int refreshHeight,int headerHeight, boolean isRefreshSuccess) {
         mRefreshTv.setText(isRefreshSuccess ? "刷新成功" : "刷新失败");
     }
 
@@ -70,7 +70,7 @@ public class HeaderView extends FrameLayout implements OnHeaderListener {
      * @param scrollY
      */
     @Override
-    public void onRefreshCancel(int scrollY) {
+    public void onRefreshCancel(int scrollY,int refreshHeight,int headerHeight) {
         mRefreshTv.setText("取消刷新");
     }
 }

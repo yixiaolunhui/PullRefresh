@@ -18,7 +18,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     // Layout状态
     private RefreshStatus status = RefreshStatus.DEFAULT;
     //阻尼系数
-    private float damp = 0.4f;
+    private float damp = 0.5f;
     //恢复动画的执行时间
     public int SCROLL_TIME = 300;
     //是否刷新完成
@@ -77,7 +77,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
         if(!isAutoRefresh)return;
         isRefreshing=true;
         measureView(header);
-        int end = header.getMeasuredHeight();
+        int end = headerContent.getMeasuredHeight();
         performAnim(0, -end, new AnimListener() {
             @Override
             public void onGoing() {
@@ -126,7 +126,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                     if (header != null&&isCanRefresh&&!isLoading&&!isRefreshing) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
-                        if (Math.abs(getScrollY()) > header.getMeasuredHeight()) {
+                        if (Math.abs(getScrollY()) > headerContent.getMeasuredHeight()) {
                             updateStatus(status.REFRESH_AFTER);
                         } else {
                             updateStatus(status.REFRESH_BEFORE);
@@ -192,29 +192,29 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 break;
             //下拉刷新
             case REFRESH_BEFORE:
-                mOnHeaderListener.onRefreshBefore(scrollY);
+                mOnHeaderListener.onRefreshBefore(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight());
                 break;
             //松手刷新
             case REFRESH_AFTER:
-                mOnHeaderListener.onRefreshAfter(scrollY);
+                mOnHeaderListener.onRefreshAfter(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight());
                 break;
             //准备刷新
             case REFRESH_READY:
-                mOnHeaderListener.onRefreshReady(scrollY);
+                mOnHeaderListener.onRefreshReady(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight());
                 break;
             //刷新中
             case REFRESH_DOING:
-                mOnHeaderListener.onRefreshing(scrollY);
+                mOnHeaderListener.onRefreshing(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight());
                 if(listener!=null)
                     listener.onRefresh();
                 break;
             //刷新完成
             case REFRESH_COMPLETE:
-                mOnHeaderListener.onRefreshComplete(scrollY, isRefreshSuccess);
+                mOnHeaderListener.onRefreshComplete(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight(), isRefreshSuccess);
                 break;
             //取消刷新
             case REFRESH_CANCEL:
-                mOnHeaderListener.onRefreshCancel(scrollY);
+                mOnHeaderListener.onRefreshCancel(scrollY,headerContent.getMeasuredHeight(),header.getMeasuredHeight());
                 break;
             //上拉加载更多
             case LOAD_BEFORE:
@@ -279,7 +279,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     private void scrolltoRefreshStatus() {
         isRefreshing=true;
         int start = getScrollY();
-        int end = -header.getMeasuredHeight();
+        int end = -headerContent.getMeasuredHeight();
         performAnim(start, end, new AnimListener() {
             @Override
             public void onGoing() {

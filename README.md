@@ -2,7 +2,7 @@
 下拉刷新
 
 ##使用范围
-####1、适合所有listview recycleView scrollview other下拉刷新加载更多
+1、适合所有listview recycleView scrollview other下拉刷新加载更多
 
 ####2、自定义刷新头部和底部 方便易用
 
@@ -25,7 +25,7 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 Use  it in your gradle
 
     dependencies {
-       compile 'com.dalong:refreshlayout:1.0.0'
+       compile 'com.dalong:refreshlayout:1.0.1'
     }
 
 
@@ -56,6 +56,22 @@ Get instance and use it.
             }
         });
 
+自定义头部图片：
+
+如果需要添加刷新顶部图片需要设置刷新部分的id为refresh_header_content 不设置默认所有view为刷新部分
+
+
+
+##版本 
+
+        1.0.1版本
+        1、增加自定义刷新头部图标
+
+
+        1.0.0版本
+        1、自动刷新 
+        2、自定义刷新布局
+        3、支持listview scrollview recycleview等等布局
 
 
 ##Thanks

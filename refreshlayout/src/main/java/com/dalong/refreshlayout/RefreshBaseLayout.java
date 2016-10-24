@@ -15,6 +15,8 @@ public class RefreshBaseLayout extends ViewGroup {
 
     //头部布局
     public View header;
+    //头部content
+    public View headerContent;
     //底部布局
     public View footer;
     //头部下拉监听接口
@@ -63,6 +65,8 @@ public class RefreshBaseLayout extends ViewGroup {
      */
     public void addHeader(View header) {
         this.header = header;
+        headerContent =header.findViewById(R.id.refresh_header_content);
+        if(headerContent==null)headerContent=header;
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
         addView(header, layoutParams);
