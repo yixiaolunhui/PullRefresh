@@ -23,7 +23,7 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 ###QQ
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/qq.gif?raw=true)
 ###淘宝
-![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/淘宝.gif?raw=true)
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/taobao.gif?raw=true)
 
 
 ##Usage
