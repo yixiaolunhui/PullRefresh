@@ -14,10 +14,14 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 
 
 ##效果图
-##自定义的效果
+###美团
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/meituan.gif?raw=true)
-
+###汽车之家
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/qichezhijia.gif?raw=true)
+###京东
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/jd.gif?raw=true)
+###QQ
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/qq.gif?raw=true)
 
 
 ##Usage
