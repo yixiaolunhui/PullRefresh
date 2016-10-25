@@ -106,6 +106,12 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
         }
     }
 
+    /**
+     * 下拉刷新
+     * @param scrollY 下拉移动的y值
+     * @param refreshHeight 刷新的高度
+     * @param headerHeight  header总高度
+     */
     @Override
     public void onRefreshBefore(int scrollY,int refreshHeight,int headerHeight) {
         changeToPullDown();
@@ -124,17 +130,36 @@ public class MeiTuanHeader extends RelativeLayout  implements OnHeaderListener {
     public void onRefreshReady(int scrollY,int refreshHeight,int headerHeight) {
     }
 
+    /**
+     * 正在刷新
+     * @param scrollY 下拉移动的y值
+     * @param refreshHeight 刷新的高度
+     * @param headerHeight  header总高度
+     */
     @Override
     public void onRefreshing(int scrollY,int refreshHeight,int headerHeight) {
         changeToRefreshing();
     }
 
+    /**
+     * 刷新完成
+     * @param scrollY 下拉移动的y值
+     * @param refreshHeight 刷新的高度
+     * @param headerHeight  header总高度
+     * @param isRefreshSuccess  刷新的状态  是成功了 还是失败了
+     */
     @Override
     public void onRefreshComplete(int scrollY,int refreshHeight,int headerHeight, boolean isRefreshSuccess) {
         onEndRefreshing();
         changeToIdle();
     }
 
+    /**
+     * 刷新取消
+     * @param scrollY 下拉移动的y值
+     * @param refreshHeight 刷新的高度
+     * @param headerHeight  header总高度
+     */
     @Override
     public void onRefreshCancel(int scrollY,int refreshHeight,int headerHeight) {
         onEndRefreshing();

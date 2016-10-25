@@ -23,7 +23,6 @@ public class QiCheZhiJiaHeader  extends RelativeLayout implements OnHeaderListen
     private static final int PULL_TO_REFRESH = 1;
     private static final int RELEASE_TO_REFRESH = 2;
     private static final int REFRESHING = 3;
-    private static final int RATIO = 3;
     private  QicheZjView mQicheZjView;
     private  PointerView mPointerView;
     private  FrameLayout mAnimContainer;

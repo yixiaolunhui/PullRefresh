@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.dalong.pullrefresh.view.jd.JDRefreshLayout;
 import com.dalong.pullrefresh.view.meituan.MeiTuanRefreshView;
 import com.dalong.refreshlayout.OnRefreshListener;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MeiTuanRefreshView refreshview;
+    private JDRefreshLayout refreshview;
     private ListView listview;
 
     public List<String> list=new ArrayList<>();
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
-        refreshview=(MeiTuanRefreshView)findViewById(R.id.refreshview);
+        refreshview=(JDRefreshLayout)findViewById(R.id.refreshview);
         listview=(ListView)findViewById(R.id.listview);
         refreshview.setAutoRefresh(true);
         refreshview.setOnRefreshListener(new OnRefreshListener() {

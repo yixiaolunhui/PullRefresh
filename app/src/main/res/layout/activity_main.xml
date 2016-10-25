@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.dalong.pullrefresh.MainActivity">
 
-    <com.dalong.pullrefresh.view.meituan.MeiTuanRefreshView
+    <com.dalong.pullrefresh.view.jd.JDRefreshLayout
         android:id="@+id/refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,6 +29,6 @@
 
 
 
-    </com.dalong.pullrefresh.view.meituan.MeiTuanRefreshView>
+    </com.dalong.pullrefresh.view.jd.JDRefreshLayout>
 
 </RelativeLayout>

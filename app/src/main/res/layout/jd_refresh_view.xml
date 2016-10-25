@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center" >
+    <com.dalong.pullrefresh.view.jd.FirstSetpView
+        android:id="@+id/first_step_view"
+        android:layout_width="45dp"
+        android:layout_height="70dp"
+        />
+    <com.dalong.pullrefresh.view.jd.SecondStepView
+        android:id="@+id/second_step_view"
+        android:layout_width="45dp"
+        android:layout_height="70dp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tv_pull_to_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="下拉刷新"
+        />
+
+
+</LinearLayout>
