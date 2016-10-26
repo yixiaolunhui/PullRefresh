@@ -4,7 +4,6 @@ package com.dalong.pullrefresh.view.ring;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.dalong.pullrefresh.view.qq.QQHeader;
 import com.dalong.refreshlayout.FooterView;
 import com.dalong.refreshlayout.RefreshLayout;
 

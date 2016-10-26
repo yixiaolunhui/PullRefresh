@@ -1,7 +1,6 @@
 package com.dalong.pullrefresh.view.ring;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +62,13 @@ public class RingHeader extends RelativeLayout implements OnHeaderListener {
         int progress=(int) ((Math.abs(scrollY)/(1.0f*refreshHeight))*100);
         ring_refresh_status.setText("下拉刷新");
         progress_bar.setProgress(progress>90?90:progress);
-        progress_bar.setShowJT(true);
+        progress_bar.setIsShowIcon(true);
     }
 
     @Override
     public void onRefreshAfter(int scrollY, int refreshHeight, int headerHeight) {
         ring_refresh_status.setText("松开刷新");
-        progress_bar.setShowJT(false);
+        progress_bar.setIsShowIcon(false);
     }
 
     @Override
