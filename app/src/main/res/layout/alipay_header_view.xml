@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="10dp"
+    android:paddingBottom="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="我的生活"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/refresh_header_content"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.dalong.pullrefresh.view.alipay.SmileyLoadingView
+            android:id="@+id/loading_view"
+            android:layout_marginTop="5dp"
+            xmlns:slv="http://schemas.android.com/apk/res-auto"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal|bottom"
+            slv:strokeColor="#b3d8f3"
+            slv:duration="2000"
+            slv:strokeWidth="4dp"/>
+    </LinearLayout>
+
+</LinearLayout>

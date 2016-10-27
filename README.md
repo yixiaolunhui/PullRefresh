@@ -27,6 +27,8 @@ http://fir.im/c8ex?release_id=581196bcca87a832160001c0
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/qq.gif?raw=true)
 ###淘宝
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/taobao.gif?raw=true)
+###支付宝
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/alipay.gif?raw=true)
 
 
 ##Usage
@@ -107,4 +109,5 @@ Get instance and use it.
 * [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh) 
 * [SmartRefreshLayout]( https://github.com/RawnHwang/SmartRefreshLayout) 
 * [Android-ConvenientBanner](https://github.com/saiwu-bigkoo/Android-ConvenientBanner) 
+* [SmileyLoadingView](https://github.com/andyxialm/SmileyLoadingView) 
 
