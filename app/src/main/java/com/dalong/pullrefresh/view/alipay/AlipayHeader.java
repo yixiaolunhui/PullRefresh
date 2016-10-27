@@ -1,6 +1,7 @@
 package com.dalong.pullrefresh.view.alipay;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -27,7 +28,8 @@ public class AlipayHeader  extends RelativeLayout implements OnHeaderListener  {
 
     @Override
     public void onRefreshBefore(int scrollY, int refreshHeight, int headerHeight) {
-
+        float scan= Math.abs(scrollY)/(1.0f*refreshHeight);
+        mSmileyLoadingView.setPaintAlpha(scan >= 1 ? 0xFF : (int) (scan * 0xFF));
     }
 
     @Override
