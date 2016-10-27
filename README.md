@@ -84,4 +84,5 @@ Get instance and use it.
 * [BeautifulRefreshLayout](https://github.com/android-cjj/BeautifulRefreshLayout)
 * [android-Ultra-Pull-To-Refresh](https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh) 
 * [SmartRefreshLayout]( https://github.com/RawnHwang/SmartRefreshLayout) 
+* [Android-ConvenientBanner](https://github.com/saiwu-bigkoo/Android-ConvenientBanner) 
 

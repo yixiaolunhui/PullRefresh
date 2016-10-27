@@ -1,0 +1,53 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.dalong.pullrefresh.view.ring.RingRefreshView
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.dalong.pullrefresh.widget.ScrollableLayout
+            android:id="@+id/scrollableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.test.cp.myscrolllayout.fragment.PagerHeaderFragment">
+
+            <RelativeLayout
+                android:id="@+id/rl_head"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#cdcdcd">
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imagepager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:canLoop="true" />
+
+            </RelativeLayout>
+
+            <com.dalong.pullrefresh.widget.PagerSlidingTabStrip
+                android:id="@+id/pagerStrip"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:pstsIndicatorHeight="3dp"
+                app:pstsTextAllCaps="true"
+                app:pstsIndicatorColor="@color/colorAccent"
+                android:layout_alignParentBottom="true"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.dalong.pullrefresh.widget.ScrollableLayout>
+
+    </com.dalong.pullrefresh.view.ring.RingRefreshView>
+</RelativeLayout>

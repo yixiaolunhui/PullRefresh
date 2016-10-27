@@ -1,4 +1,4 @@
-package com.dalong.pullrefresh;
+package com.dalong.pullrefresh.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,13 +8,14 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.dalong.pullrefresh.R;
 import com.dalong.pullrefresh.view.ring.RingRefreshView;
 import com.dalong.refreshlayout.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class NormalActivity extends AppCompatActivity {
 
     private RingRefreshView refreshview;
     private ListView listview;
@@ -27,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initData();
         refreshview=(RingRefreshView)findViewById(R.id.refreshview);
-        listview=(ListView)findViewById(R.id.listview);
-        refreshview.setAutoRefresh(true);
+        listview=(ListView)findViewById(R.id.normal_listview);
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {

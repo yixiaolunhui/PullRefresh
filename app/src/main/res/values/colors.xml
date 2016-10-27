@@ -5,4 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="light_blue">#323232</color>
     <color name="white">#ffffff</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+
+
+
+    <color name="c_0">#7B68EE</color>
+    <color name="c_1">#FF69B4</color>
+    <color name="c_2">#6495ED</color>
+    <color name="c_3">#FFBF00</color>
 </resources>

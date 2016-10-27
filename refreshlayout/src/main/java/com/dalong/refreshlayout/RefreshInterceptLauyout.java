@@ -46,33 +46,21 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
             // Move事件
             case MotionEvent.ACTION_MOVE: {
                 if (y > lastYIntercept) { // 下滑操作
-                    // 获取最顶部的子视图
-                    View child = getFirstVisiableChild();
-                    if (child == null) {
-                        intercept = false;
-                    } else if (child instanceof AdapterView) {
-                        intercept = avPullDownIntercept(child);
-                    } else if (child instanceof ScrollView) {
-                        intercept = svPullDownIntercept(child);
-                    } else if (child instanceof RecyclerView) {
-                        intercept = rvPullDownIntercept(child);
-                    } else if (child instanceof WebView){
-                        intercept = wvPullDownIntercept(child);
+                    // 检查子试图是否达到了顶部
+                    if(mOnCheckCanRefreshListener!=null){
+                        intercept=mOnCheckCanRefreshListener.checkCanDoRefresh();
+                    }else{
+                        intercept=getPullDownIntercept();
                     }
+
                 } else if (y < lastYIntercept) { // 上拉操作
-                    // 获取最底部的子视图
-                    View child = getLastVisiableChild();
-                    if (child == null) {
-                        intercept = false;
-                    } else if (child instanceof AdapterView) {
-                        intercept = avPullUpIntercept(child);
-                    } else if (child instanceof ScrollView) {
-                        intercept = svPullUpIntercept(child);
-                    } else if (child instanceof RecyclerView) {
-                        intercept = rvPullUpIntercept(child);
-                    } else if (child instanceof WebView){
-                        intercept = wvPullUpIntercept(child);
+                    // 检查子试图是否到达了底部
+                    if(mOnCheckCanLoadMoreListener!=null){
+                        intercept=mOnCheckCanLoadMoreListener.checkCanDoLoadMore();
+                    }else{
+                        intercept=getPullUpIntercept();
                     }
+
                 } else {
                     intercept = false;
                 }
@@ -89,6 +77,47 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
         return intercept;
     }
 
+    /**
+     * 能不能下拉刷新
+     * @return
+     */
+    public boolean getPullDownIntercept() {
+        boolean  intercept=false;
+        View child = getFirstVisiableChild();
+        if (child == null) {
+            intercept = false;
+        } else if (child instanceof AdapterView) {
+            intercept = avPullDownIntercept(child);
+        } else if (child instanceof ScrollView) {
+            intercept = svPullDownIntercept(child);
+        } else if (child instanceof RecyclerView) {
+            intercept = rvPullDownIntercept(child);
+        } else if (child instanceof WebView){
+            intercept = wvPullDownIntercept(child);
+        }
+        return intercept;
+    }
+
+    /**
+     * 能不能加载
+     * @return
+     */
+    public  boolean getPullUpIntercept(){
+        boolean  intercept=false;
+        View child = getLastVisiableChild();
+        if (child == null) {
+            intercept = false;
+        } else if (child instanceof AdapterView) {
+            intercept = avPullUpIntercept(child);
+        } else if (child instanceof ScrollView) {
+            intercept = svPullUpIntercept(child);
+        } else if (child instanceof RecyclerView) {
+            intercept = rvPullUpIntercept(child);
+        } else if (child instanceof WebView){
+            intercept = wvPullUpIntercept(child);
+        }
+        return intercept;
+    }
 
     /**
      * 获取最后一个可见的子view
@@ -239,5 +268,24 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
             intercept = true;
 
         return intercept;
+    }
+
+
+    /**
+     * 检查是否可以下拉刷新
+     * 当使用过程中需要自己控制是否需要刷新时可以实现这个回调接口
+     */
+    public OnCheckCanRefreshListener mOnCheckCanRefreshListener;
+    public void setOnCheckCanRefreshListener(OnCheckCanRefreshListener mOnCheckCanRefreshListener){
+        this.mOnCheckCanRefreshListener=mOnCheckCanRefreshListener;
+    }
+
+    /**
+     * 检查是否可以加载更多
+     * 当使用过程中需要自己控制是否需要加载更多时可以实现这个回调接口
+     */
+    public OnCheckCanLoadMoreListener mOnCheckCanLoadMoreListener;
+    public void setOnCheckCanLoadMoreListener(OnCheckCanLoadMoreListener mOnCheckCanLoadMoreListener){
+        this.mOnCheckCanLoadMoreListener=mOnCheckCanLoadMoreListener;
     }
 }

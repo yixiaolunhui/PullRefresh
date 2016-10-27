@@ -4,19 +4,18 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dalong.pullrefresh.MainActivity">
+    tools:context="com.dalong.pullrefresh.ui.NormalActivity">
 
     <com.dalong.pullrefresh.view.ring.RingRefreshView
         android:id="@+id/refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ListView
-            android:id="@+id/listview"
+            android:id="@+id/normal_listview"
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-
 
 
     </com.dalong.pullrefresh.view.ring.RingRefreshView>
