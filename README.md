@@ -14,6 +14,9 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 
 
 ##效果图
+
+###自定义子view的
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/pullRefresh.gif?raw=true)
 ###美团
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/meituan.gif?raw=true)
 ###汽车之家
@@ -31,7 +34,7 @@ http://fir.im/c8ex?release_id=58085c52ca87a840ec000547
 Use  it in your gradle
 
     dependencies {
-       compile 'com.dalong:refreshlayout:1.0.1'
+       compile 'com.dalong:refreshlayout:1.0.2'
     }
 
 
@@ -61,6 +64,21 @@ Get instance and use it.
                 // start load
             }
         });
+        
+        如果子view是自定义的view需要告诉刷新控件是否可以刷新或者加载可以实现此接口
+        
+             mRingRefreshView.setOnCheckCanRefreshListener(new OnCheckCanRefreshListener() {
+                   @Override
+                   public boolean checkCanDoRefresh() {
+                         return mScrollLayout.canRefresh();
+                   }     
+             });
+             mRingRefreshView.setOnCheckCanLoadMoreListener(new OnCheckCanLoadMoreListener() {
+                    @Override
+                    public boolean checkCanDoLoadMore() {
+                        return mScrollLayout.canLoadMore();
+                    }
+              });
 
 自定义头部图片：
 
@@ -69,7 +87,11 @@ Get instance and use it.
 
 
 ##版本 
-
+        1.0.2版本
+        1、增加固定头部
+        2、刷新库添加检查是否可以刷新加载回调
+        
+        
         1.0.1版本
         1、增加自定义刷新头部图标
 

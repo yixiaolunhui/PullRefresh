@@ -32,14 +32,12 @@ public class NormalActivity extends AppCompatActivity {
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.v("111111","onRefresh");
                 mHandler.removeMessages(0);
                 mHandler.sendEmptyMessageDelayed(0,3000);
             }
 
             @Override
             public void onLoadMore() {
-                Log.v("111111","onLoadMore");
                 mHandler.removeMessages(1);
                 mHandler.sendEmptyMessageDelayed(1,3000);
             }
