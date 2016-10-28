@@ -25,16 +25,12 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     private boolean isRefreshSuccess = false;
     //是否加载完成
     private boolean isLoadSuccess = false;
-    //是否可以下拉刷新
-    private boolean isCanRefresh=true;
-    //是否可以加载更多
-    private boolean isCanLoad=true;
-    //是否自动下拉刷新
-    private boolean isAutoRefresh=false;
     //正在加载中
     public boolean isLoading=false;
     //正在刷新中
     public boolean isRefreshing=false;
+    //是否自动下拉刷新
+    private boolean isAutoRefresh=false;
 
     public RefreshLayout(Context context) {
         super(context);
@@ -122,8 +118,8 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 // 计算本次滑动的Y轴增量(距离)
                 int dy = y - lastYMove;
                 // 如果getScrollY<0，即下拉操作
-                if (getScrollY() < 0) {
-                    if (header != null&&isCanRefresh&&!isLoading&&!isRefreshing) {
+                if (getScrollY() <= 0) {
+                    if (header != null&&!isLoading&&!isRefreshing) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (Math.abs(getScrollY()) > headerContent.getMeasuredHeight()) {
@@ -135,7 +131,7 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                 }
                 // 如果getScrollY>=0，即上拉操作
                 else {
-                    if (footer != null&&isCanLoad&&!isRefreshing&&!isLoading) {
+                    if (footer != null&&!isRefreshing&&!isLoading) {
                         // 进行Y轴上的滑动
                         performScroll(dy);
                         if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {

@@ -20,6 +20,12 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
     public int lastYMove;
     // 用于判断是否拦截触摸事件的Y坐标中介
     public int lastYIntercept;
+
+    //是否可以加载更多
+    public boolean isCanLoad=true;
+    //是否可以下拉刷新
+    public boolean isCanRefresh=true;
+
     public RefreshInterceptLauyout(Context context) {
         super(context);
     }
@@ -27,6 +33,8 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
     public RefreshInterceptLauyout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
@@ -53,7 +61,9 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
                         intercept=getPullDownIntercept();
                     }
 
+                    if(!isCanRefresh)intercept=false;
                 } else if (y < lastYIntercept) { // 上拉操作
+
                     // 检查子试图是否到达了底部
                     if(mOnCheckCanLoadMoreListener!=null){
                         intercept=mOnCheckCanLoadMoreListener.checkCanDoLoadMore();
@@ -61,6 +71,7 @@ public abstract  class RefreshInterceptLauyout extends RefreshBaseLayout {
                         intercept=getPullUpIntercept();
                     }
 
+                    if(!isCanLoad)intercept=false;
                 } else {
                     intercept = false;
                 }

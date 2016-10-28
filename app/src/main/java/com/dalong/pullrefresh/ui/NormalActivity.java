@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.dalong.pullrefresh.R;
 import com.dalong.pullrefresh.view.alipay.AlipayRefreshView;
-import com.dalong.pullrefresh.view.ring.RingRefreshView;
 import com.dalong.refreshlayout.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ public class NormalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initData();
         refreshview=(AlipayRefreshView)findViewById(R.id.refreshview);
+        refreshview.setCanRefresh(true);
+        refreshview.setCanLoad(true);
         listview=(ListView)findViewById(R.id.normal_listview);
         refreshview.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -64,7 +64,7 @@ public class NormalActivity extends AppCompatActivity {
     };
 
     public void initData(){
-        for (int i=0;i<16;i++){
+        for (int i=0;i<15;i++){
             list.add("测试的"+i);
         }
     }

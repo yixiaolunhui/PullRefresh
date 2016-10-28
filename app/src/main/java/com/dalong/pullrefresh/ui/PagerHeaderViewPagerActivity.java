@@ -20,7 +20,6 @@ import com.dalong.pullrefresh.fragment.WebViewFragment;
 import com.dalong.pullrefresh.view.ring.RingRefreshView;
 import com.dalong.pullrefresh.widget.PagerSlidingTabStrip;
 import com.dalong.pullrefresh.widget.ScrollableLayout;
-import com.dalong.refreshlayout.OnCheckCanLoadMoreListener;
 import com.dalong.refreshlayout.OnCheckCanRefreshListener;
 import com.dalong.refreshlayout.OnRefreshListener;
 
