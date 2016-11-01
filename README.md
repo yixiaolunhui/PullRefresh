@@ -36,7 +36,7 @@ http://fir.im/c8ex?release_id=581196bcca87a832160001c0
 Use  it in your gradle
 
     dependencies {
-       compile 'com.dalong:refreshlayout:1.0.2'
+       compile 'com.dalong:refreshlayout:1.0.3'
     }
 
 
@@ -89,6 +89,9 @@ Get instance and use it.
 
 
 ##版本 
+        1.0.3版本
+        1、修复下拉刷新的时候不抬手再上拉会出现加载的view的问题。
+
         1.0.2版本
         1、增加固定头部
         2、刷新库添加检查是否可以刷新加载回调
