@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -31,6 +32,9 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     public boolean isRefreshing=false;
     //是否自动下拉刷新
     private boolean isAutoRefresh=false;
+
+    //操作状态  -1是默认的状态   0刷新   1加载
+    private int  actionStatus=-1;
 
     public RefreshLayout(Context context) {
         super(context);
@@ -114,39 +118,32 @@ public class RefreshLayout extends RefreshInterceptLauyout {
     public boolean onTouchEvent(MotionEvent event) {
         int y = (int) event.getY();
         switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE:
                 // 计算本次滑动的Y轴增量(距离)
                 int dy = y - lastYMove;
                 // 如果getScrollY<0，即下拉操作
-                if (getScrollY() <= 0) {
+
+                if (getScrollY() < 0) { // 进行Y轴上的滑动
                     if (header != null&&!isLoading&&!isRefreshing) {
-                        // 进行Y轴上的滑动
-                        performScroll(dy);
-                        if (Math.abs(getScrollY()) > headerContent.getMeasuredHeight()) {
-                            updateStatus(status.REFRESH_AFTER);
-                        } else {
-                            updateStatus(status.REFRESH_BEFORE);
-                        }
+                        goToRefresh(dy);
                     }
-                }
-                // 如果getScrollY>=0，即上拉操作
-                else {
+                } else if(getScrollY() >0) {  // 如果getScrollY>=0，即上拉操作
                     if (footer != null&&!isRefreshing&&!isLoading) {
-                        // 进行Y轴上的滑动
-                        performScroll(dy);
-                        if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {
-                            updateStatus(status.LOAD_AFTER);
-                        } else {
-                            updateStatus(status.LOAD_BEFORE);
-                        }
+                        goToLoad(dy);
+                    }
+                }else{
+                    if(dy>=0){
+                        if(actionStatus==-1)actionStatus=0;
+                        goToRefresh(dy);
+                    }else{
+                        if(actionStatus==-1) actionStatus=1;
+                        goToLoad(dy);
                     }
                 }
                 // 记录y坐标
                 lastYMove = y;
                 break;
-            }
-
-            case MotionEvent.ACTION_UP: {
+            case MotionEvent.ACTION_UP:
                 // 判断本次触摸系列事件结束时,Layout的状态
                 switch (status) {
                     //下拉刷新
@@ -164,14 +161,52 @@ public class RefreshLayout extends RefreshInterceptLauyout {
                         scrolltoLoadStatus();
                         break;
                     default:
+                        actionStatus=-1;
                         break;
                 }
-            }
+            case MotionEvent.ACTION_CANCEL:
+                actionStatus=-1;
+                break;
         }
         lastYIntercept = 0;
         postInvalidate();
         return true;
     }
+
+
+    /**
+     * 去刷新
+     * @param dy
+     */
+    private void goToRefresh(int dy){
+        if(actionStatus==0){
+            performScroll(dy);
+            if (Math.abs(getScrollY()) > headerContent.getMeasuredHeight()) {
+                updateStatus(status.REFRESH_AFTER);
+            } else {
+                updateStatus(status.REFRESH_BEFORE);
+            }
+        }
+    }
+
+    /**
+     *  去加载
+     * @param dy
+     */
+    private void goToLoad(int dy){
+        if(actionStatus==1){
+            // 进行Y轴上的滑动
+            performScroll(dy);
+            if (getScrollY() >= bottomScroll + footer.getMeasuredHeight()) {
+                updateStatus(status.LOAD_AFTER);
+            } else {
+                updateStatus(status.LOAD_BEFORE);
+            }
+        }
+    }
+
+
+
 
     /**
      * 刷新状态
