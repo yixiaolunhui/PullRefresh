@@ -31,6 +31,8 @@ http://fir.im/c8ex?release_id=581196bcca87a832160001c0
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/alipay.gif?raw=true)
 ###美团外卖
 ![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/mtwm.gif?raw=true)
+###qq邮箱
+![image](https://github.com/dalong982242260/PullRefresh/blob/master/img/qqmail.gif?raw=true)
 
 
 ##Usage

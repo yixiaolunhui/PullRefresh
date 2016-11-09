@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.dalong.pullrefresh.view.qqmail.QQMailView
+        android:id="@+id/qq_mail"
+        app:maxRadius="3dp"
+        app:minRadius="2dp"
+        app:distance="10dp"
+        app:durationTime="900"
+        app:leftColor="@color/c_0"
+        app:centerColor="@color/c_1"
+        app:rightColor="@color/c_3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

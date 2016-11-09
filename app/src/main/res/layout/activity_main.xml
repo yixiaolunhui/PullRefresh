@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.dalong.pullrefresh.ui.NormalActivity">
 
-    <com.dalong.pullrefresh.view.mtwm.MeiTuanWaiMaiefreshView
+    <com.dalong.pullrefresh.view.qqmail.QQMailRefreshLayout
         android:id="@+id/refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,6 +18,6 @@
             android:layout_height="match_parent"/>
 
 
-    </com.dalong.pullrefresh.view.mtwm.MeiTuanWaiMaiefreshView>
+    </com.dalong.pullrefresh.view.qqmail.QQMailRefreshLayout>
 
 </RelativeLayout>

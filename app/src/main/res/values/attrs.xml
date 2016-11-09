@@ -26,4 +26,15 @@
         <!-- animation repeat count -->
         <attr name="animRepeatCount" format="integer"/>
     </declare-styleable>
+
+
+    <declare-styleable name="QQMailView">
+        <attr name="leftColor" format="color"/>
+        <attr name="centerColor" format="color"/>
+        <attr name="rightColor" format="color"/>
+        <attr name="maxRadius" format="dimension"/>
+        <attr name="minRadius" format="dimension"/>
+        <attr name="distance" format="dimension"/>
+        <attr name="durationTime" format="integer"/>
+    </declare-styleable>
 </resources>
