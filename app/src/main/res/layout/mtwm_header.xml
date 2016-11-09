@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <com.dalong.pullrefresh.view.mtwm.MeiTuanWaiMaiView
+        android:id="@+id/refreshAnimView"
+        android:layout_width="59dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"/>
+
+    <ImageView
+        android:id="@+id/mPullAnimation"
+        android:background="@drawable/loading"
+        android:layout_width="59dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp" />
+</LinearLayout>
