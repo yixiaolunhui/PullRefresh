@@ -35,27 +35,7 @@ public class RingHeader extends RelativeLayout implements OnHeaderListener {
         // 添加匀速转动动画
         LinearInterpolator lir = new LinearInterpolator();
         refreshingAnimation.setInterpolator(lir);
-
-        measureView(headerView);
         progress_bar.setProgress(90);
-    }
-    private void measureView(View child) {
-        ViewGroup.LayoutParams p = child.getLayoutParams();
-        if (p == null) {
-            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
-        int lpHeight = p.height;
-        int childHeightSpec;
-        if (lpHeight > 0) {
-            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,
-                    MeasureSpec.EXACTLY);
-        } else {
-            childHeightSpec = MeasureSpec.makeMeasureSpec(0,
-                    MeasureSpec.UNSPECIFIED);
-        }
-        child.measure(childWidthSpec, childHeightSpec);
     }
     @Override
     public void onRefreshBefore(int scrollY, int refreshHeight, int headerHeight) {

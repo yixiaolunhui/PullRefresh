@@ -8,9 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.dalong.pullrefresh.R;
-import com.dalong.pullrefresh.view.alipay.AlipayRefreshView;
-import com.dalong.pullrefresh.view.mtwm.MeiTuanWaiMaiefreshView;
-import com.dalong.pullrefresh.view.qqmail.QQMailRefreshLayout;
+import com.dalong.pullrefresh.view.ring.RingRefreshView;
 import com.dalong.refreshlayout.OnRefreshListener;
 
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import java.util.List;
 
 public class NormalActivity extends AppCompatActivity {
 
-    private QQMailRefreshLayout refreshview;
+    private RingRefreshView refreshview;
     private ListView listview;
 
     public List<String> list=new ArrayList<>();
@@ -28,7 +26,7 @@ public class NormalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
-        refreshview=(QQMailRefreshLayout)findViewById(R.id.refreshview);
+        refreshview=(RingRefreshView)findViewById(R.id.refreshview);
         refreshview.setCanRefresh(true);
         refreshview.setCanLoad(true);
         listview=(ListView)findViewById(R.id.normal_listview);
